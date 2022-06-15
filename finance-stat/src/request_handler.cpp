@@ -15,6 +15,7 @@
 #include "mime_types.hpp"
 #include "reply.hpp"
 #include "request.hpp"
+#include "CostsHandler.h"
 
 namespace http {
     namespace server {
@@ -34,6 +35,11 @@ namespace http {
                 return;
             }
 
+            if (request_path == "/costs")
+            {
+                return CostsHandler::run(rep);
+            }
+            
             // Request path must be absolute and not contain "..".
             if (request_path.empty() || request_path[0] != '/'
                 || request_path.find("..") != std::string::npos)

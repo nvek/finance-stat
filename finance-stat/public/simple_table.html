@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Простая таблица</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+
+<header>
+
+</header>
+
+<main>
+    <div class="container">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">Пн</th>
+                <th scope="col">Вт</th>
+                <th scope="col">Ср</th>
+                <th scope="col">Чт</th>
+                <th scope="col">Пт</th>
+                <th scope="col">Сб</th>
+                <th scope="col">Вс</th>
+                <th scope="col">Расходные за неделю</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Супермаркет</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Другая еда</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Аптека</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Транспорт</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Дети</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Питомцы</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Итого:</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div id="output"></div>
+
+</main>
+
+<footer>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        const output = document.getElementById('output');
+
+        $.ajax({
+            url: "/costs",
+        }).done(function (data) {
+
+            console.log(data);
+            $.each(data, function (i, item) {
+                let el = '<div>';
+                el += '<div>' + item.id + '</div>';
+                el += '<div>' + item.amount + '</div>';
+                el += '<div>' + item.categoryId + '</div>';
+                el += '<div>' + item.date + '</div>';
+                el += '</div>';
+
+                $(output).append(el);
+            })
+        });
+
+    });
+</script>
+</body>
+</html>
