@@ -1,1 +1,6 @@
 build/*
+.vs/
+CMakeSettings.json
+build-x64-Debug/
+finance-stat/CMakeSettings.json
+out/
