@@ -1,5 +1,6 @@
 build/*
 .vs/
+.idea/
 CMakeSettings.json
 build-x64-Debug/
 finance-stat/CMakeSettings.json
