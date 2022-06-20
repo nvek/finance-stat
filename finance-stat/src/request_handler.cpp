@@ -15,7 +15,7 @@
 #include "mime_types.hpp"
 #include "reply.hpp"
 #include "request.hpp"
-#include "CostsHandler.h"
+#include "costs_handler.hpp"
 
 namespace http {
     namespace server {
