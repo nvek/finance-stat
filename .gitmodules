@@ -1,3 +1,6 @@
 [submodule "submodules/libpqxx"]
 	path = submodules/libpqxx
 	url = https://github.com/jtv/libpqxx.git
+[submodule "submodules/vcpkg"]
+	path = submodules/vcpkg
+	url = https://github.com/microsoft/vcpkg
