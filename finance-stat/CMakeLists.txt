@@ -1,8 +1,11 @@
 project(finance-stat)
 
 find_package(Boost REQUIRED COMPONENTS system)
+find_package(libpqxx CONFIG REQUIRED)
 
-file(GLOB SOURCES src/*.cpp src/*.hpp)
-add_executable(${PROJECT_NAME} ${SOURCES} "src/routes_manager.h" "src/iservice.h" "src/routes_manager.cpp" "src/registration_service.h" "src/registration_service.cpp" "src/files_service.h" "src/files_service.cpp" "src/data_base_service.h" "src/data_base_service.cpp")
+file(GLOB SOURCES src/*.cpp src/*.hpp src/*.h)
+add_executable(${PROJECT_NAME} ${SOURCES})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE Boost::system)
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE Boost::system libpqxx::pqxx)

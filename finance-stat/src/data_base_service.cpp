@@ -1,5 +1,6 @@
 #include "data_base_service.h"
 #include <pqxx/pqxx>
+#include <iostream>
 
 namespace http {
 	namespace server {
@@ -53,14 +54,18 @@ namespace http {
                 }
                 else {
                     std::cout << "Can't open database" << std::endl;
-                    return;
+                    reply rep;
+                    rep.status = reply::bad_request;
+                    return rep;
                 }
 
                 conn.close();
             }
             catch (const std::exception& e) {
                 std::cerr << e.what() << std::endl;
-                return;
+                reply rep;
+                rep.status = reply::bad_request;
+                return rep;
             }
 
 			return rep;
