@@ -15,18 +15,28 @@
 #include "mime_types.hpp"
 #include "reply.hpp"
 #include "request.hpp"
-#include "costs_handler.hpp"
+#include "registration_service.h"
+#include "files_service.h"
 
 namespace http {
     namespace server {
 
         request_handler::request_handler(const std::string& doc_root)
-            : doc_root_(doc_root)
+            :   routes_mgr_()
         {
+            routes_mgr_.reg_service(std::make_shared<registration_service>());
+            routes_mgr_.reg_service(std::make_shared<files_service>(doc_root));
+        }
+
+        request_handler::~request_handler()
+        {
+            routes_mgr_.clear_all_services();
         }
 
         void request_handler::handle_request(const request& req, reply& rep)
         {
+            rep = routes_mgr_.runRoute(req);
+            /*
             // Decode url to path.
             std::string request_path;
             if (!url_decode(req.uri, request_path))
@@ -82,45 +92,7 @@ namespace http {
             rep.headers[0].value = std::to_string(rep.content.size());
             rep.headers[1].name = "Content-Type";
             rep.headers[1].value = mime_types::extension_to_type(extension);
-        }
-
-        bool request_handler::url_decode(const std::string& in, std::string& out)
-        {
-            out.clear();
-            out.reserve(in.size());
-            for (std::size_t i = 0; i < in.size(); ++i)
-            {
-                if (in[i] == '%')
-                {
-                    if (i + 3 <= in.size())
-                    {
-                        int value = 0;
-                        std::istringstream is(in.substr(i + 1, 2));
-                        if (is >> std::hex >> value)
-                        {
-                            out += static_cast<char>(value);
-                            i += 2;
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                else if (in[i] == '+')
-                {
-                    out += ' ';
-                }
-                else
-                {
-                    out += in[i];
-                }
-            }
-            return true;
+            */
         }
 
     } // namespace server

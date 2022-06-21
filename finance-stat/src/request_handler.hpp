@@ -13,6 +13,8 @@
 
 #include <string>
 
+#include "routes_manager.h"
+
 namespace http {
 	namespace server {
 
@@ -28,17 +30,15 @@ namespace http {
 
 			/// Construct with a directory containing files to be served.
 			explicit request_handler(const std::string& doc_root);
+			~request_handler();
 
 			/// Handle a request and produce a reply.
 			void handle_request(const request& req, reply& rep);
 
 		private:
+			routes_manager routes_mgr_;
 			/// The directory containing the files to be served.
 			std::string doc_root_;
-
-			/// Perform URL-decoding on a string. Returns false if the encoding was
-			/// invalid.
-			static bool url_decode(const std::string& in, std::string& out);
 		};
 
 	} // namespace server
