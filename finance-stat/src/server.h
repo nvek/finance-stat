@@ -1,9 +1,8 @@
-#ifndef HTTP_SERVER_HPP
-#define HTTP_SERVER_HPP
+#pragma once
 
 #include "connection.h"
 #include "connection_manager.h"
-#include "request_handler.h"
+#include "RequestHandler.h"
 #include <boost/asio.hpp>
 #include <string>
 
@@ -21,15 +20,15 @@ class server
 
     /// Construct the server to listen on the specified TCP address and port, and
     /// serve up files from the given directory.
-    explicit server(const std::string& address, const std::string& port, const std::string& doc_root);
+    explicit server(const std::string& address, const std::string& port, const RequestHandlerPtr& requestHandler);
 
     /// Run the server's io_service loop.
     void run();
 
   private:
-    /// Perform an asynchronous accept operation.
-    void do_accept();
 
+    void do_accept();
+      
     /// Wait for a request to stop the server.
     void do_await_stop();
 
@@ -49,10 +48,8 @@ class server
     boost::asio::ip::tcp::socket socket_;
 
     /// The handler for all incoming requests.
-    request_handler request_handler_;
+    RequestHandlerPtr requestHandler_;
 };
 
 } // namespace server
 } // namespace http
-
-#endif // HTTP_SERVER_HPP

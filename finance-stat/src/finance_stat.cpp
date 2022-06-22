@@ -1,4 +1,6 @@
 #include "server.h"
+#include "ServerRequestHandler.h"
+
 #include <boost/asio.hpp>
 #include <iostream>
 #include <string>
@@ -19,7 +21,7 @@ int main(int argc, char* argv[])
         }
 
         // Initialise the server.
-        http::server::server s(argv[1], argv[2], argv[3]);
+        http::server::server s(argv[1], argv[2], std::make_shared<http::server::ServerRequestHandler>(argv[3]));
 
         // Run the server until stopped.
         s.run();

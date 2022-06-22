@@ -1,3 +1,5 @@
+#pragma once
+
 #include "iservice.h"
 #include "reply.h"
 #include "request.h"

@@ -8,7 +8,7 @@
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
-#include "request_handler.h"
+#include "ServerRequestHandler.h"
 #include "files_service.h"
 #include "mime_types.h"
 #include "registration_service.h"
@@ -23,18 +23,18 @@ namespace http
 namespace server
 {
 
-request_handler::request_handler(const std::string& doc_root) : routes_mgr_()
+ServerRequestHandler::ServerRequestHandler(const std::string& doc_root) : routes_mgr_()
 {
     routes_mgr_.reg_service(std::make_shared<registration_service>());
     routes_mgr_.reg_service(std::make_shared<files_service>(doc_root));
 }
 
-request_handler::~request_handler()
+ServerRequestHandler::~ServerRequestHandler()
 {
     routes_mgr_.clear_all_services();
 }
 
-void request_handler::handle_request(const request& req, reply& rep)
+void ServerRequestHandler::handle_request(const request& req, reply& rep)
 {
     rep = routes_mgr_.runRoute(req);
     /*

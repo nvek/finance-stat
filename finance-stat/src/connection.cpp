@@ -10,17 +10,17 @@
 
 #include "connection.h"
 #include "connection_manager.h"
-#include "request_handler.h"
 #include <utility>
 #include <vector>
 
 namespace http {
 namespace server {
 
-connection::connection(boost::asio::ip::tcp::socket socket,
-                       connection_manager& manager, request_handler& handler)
-    : socket_(std::move(socket)), connection_manager_(manager),
-      request_handler_(handler) {}
+connection::connection(boost::asio::ip::tcp::socket socket, connection_manager& manager,
+                       const RequestHandlerPtr& handler)
+    : socket_(std::move(socket)), connection_manager_(manager), request_handler_(handler)
+{
+}
 
 void connection::start() { do_read(); }
 
@@ -38,7 +38,7 @@ void connection::do_read() {
               request_, buffer_.data(), buffer_.data() + bytes_transferred);
 
           if (result == request_parser::good) {
-            request_handler_.handle_request(request_, reply_);
+            request_handler_->handle_request(request_, reply_);
             do_write();
           } else if (result == request_parser::bad) {
             reply_ = reply::stock_reply(reply::bad_request);

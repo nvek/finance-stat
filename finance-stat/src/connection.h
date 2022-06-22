@@ -13,7 +13,7 @@
 
 #include "reply.h"
 #include "request.h"
-#include "request_handler.h"
+#include "RequestHandler.h"
 #include "request_parser.h"
 #include <boost/asio.hpp>
 #include <array>
@@ -34,7 +34,7 @@ class connection : public std::enable_shared_from_this<connection>
     connection& operator=(const connection&) = delete;
 
     /// Construct a connection with the given socket.
-    explicit connection(boost::asio::ip::tcp::socket socket, connection_manager& manager, request_handler& handler);
+    explicit connection(boost::asio::ip::tcp::socket socket, connection_manager& manager, const RequestHandlerPtr& handler);
 
     /// Start the first asynchronous operation for the connection.
     void start();
@@ -56,7 +56,7 @@ class connection : public std::enable_shared_from_this<connection>
     connection_manager& connection_manager_;
 
     /// The handler used to process the incoming request.
-    request_handler& request_handler_;
+    const RequestHandlerPtr request_handler_;
 
     /// Buffer for incoming data.
     std::array<char, 8192> buffer_;
