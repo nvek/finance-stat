@@ -1,0 +1,15 @@
+
+BasedOnStyle: Microsoft
+ColumnLimit: 120
+DerivePointerAlignment: false
+PointerAlignment: Left
+
+IncludeBlocks: Merge
+IncludeCategories:
+# Matches common headers first, but sorts them after project includes
+- Regex: '^\"'
+  Priority: 1500
+- Regex: '^<.*/.*'
+  Priority: 4000
+- Regex: '^<[^/]*>'
+  Priority: 5000

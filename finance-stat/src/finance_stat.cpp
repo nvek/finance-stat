@@ -1,7 +1,7 @@
+#include "server.h"
+#include <boost/asio.hpp>
 #include <iostream>
 #include <string>
-#include <boost/asio.hpp>
-#include "server.hpp"
 
 int main(int argc, char* argv[])
 {

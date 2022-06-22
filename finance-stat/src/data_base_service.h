@@ -2,19 +2,23 @@
 
 #include "iservice.h"
 
-namespace http {
-	namespace server {
-		class data_base_service : public iservice
-		{
-		public:
-			data_base_service();
+namespace http
+{
+namespace server
+{
 
-			int getPriority() override;
-			std::vector<std::string> getRoutes() override;
-			reply run(const request& req) override;
+class data_base_service : public iservice
+{
+  public:
+    data_base_service();
 
-		private:
-			std::vector<std::string> routes_;
-		};
-	}
-}
+    int getPriority() override;
+    std::vector<std::string> getRoutes() override;
+    reply run(const request& req) override;
+
+  private:
+    std::vector<std::string> routes_;
+};
+
+} // namespace server
+} // namespace http
