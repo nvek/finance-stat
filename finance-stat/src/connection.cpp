@@ -8,8 +8,8 @@
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
-#include "connection.h"
-#include "connection_manager.h"
+#include "Connection.h"
+#include "ConnectionManager.h"
 #include <utility>
 #include <vector>
 

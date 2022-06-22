@@ -1,8 +1,8 @@
 #pragma once
 
-#include "iservice.h"
-#include "reply.h"
-#include "request.h"
+#include "IService.h"
+#include "Reply.h"
+#include "Request.h"
 #include <unordered_map>
 #include <unordered_set>
 

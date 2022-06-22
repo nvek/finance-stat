@@ -9,11 +9,11 @@
 //
 
 #include "ServerRequestHandler.h"
-#include "files_service.h"
-#include "mime_types.h"
-#include "registration_service.h"
-#include "reply.h"
-#include "request.h"
+#include "FilesService.h"
+#include "MimeTypes.h"
+#include "RegistrationService.h"
+#include "Reply.h"
+#include "Request.h"
 #include <fstream>
 #include <sstream>
 #include <string>

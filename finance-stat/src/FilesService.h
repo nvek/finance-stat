@@ -1,12 +1,16 @@
-#include "iservice.h"
+#pragma once
+
+#include "IService.h"
 
 namespace http
 {
 namespace server
 {
-class registration_service : public iservice
+class files_service : public iservice
 {
   public:
+    explicit files_service(const std::string& doc_path);
+
     int getPriority() override;
     std::vector<std::string> getRoutes() override;
     reply run(const request& req) override;

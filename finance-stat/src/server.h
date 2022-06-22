@@ -1,7 +1,7 @@
 #pragma once
 
-#include "connection.h"
-#include "connection_manager.h"
+#include "Connection.h"
+#include "ConnectionManager.h"
 #include "RequestHandler.h"
 #include <boost/asio.hpp>
 #include <string>

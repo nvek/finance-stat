@@ -11,7 +11,7 @@
 #ifndef HTTP_CONNECTION_MANAGER_HPP
 #define HTTP_CONNECTION_MANAGER_HPP
 
-#include "connection.h"
+#include "Connection.h"
 #include <set>
 
 namespace http

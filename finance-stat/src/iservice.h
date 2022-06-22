@@ -1,7 +1,7 @@
 #pragma once
 
-#include "reply.h"
-#include "request.h"
+#include "Reply.h"
+#include "Request.h"
 
 namespace http
 {

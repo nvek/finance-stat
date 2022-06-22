@@ -11,10 +11,10 @@
 #ifndef HTTP_CONNECTION_HPP
 #define HTTP_CONNECTION_HPP
 
-#include "reply.h"
-#include "request.h"
+#include "Reply.h"
+#include "Request.h"
 #include "RequestHandler.h"
-#include "request_parser.h"
+#include "RequestParser.h"
 #include <boost/asio.hpp>
 #include <array>
 #include <memory>

@@ -11,7 +11,7 @@
 #ifndef HTTP_REPLY_HPP
 #define HTTP_REPLY_HPP
 
-#include "header.h"
+#include "Header.h"
 #include <boost/asio.hpp>
 #include <string>
 #include <vector>
