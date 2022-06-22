@@ -16,16 +16,16 @@ namespace http
 namespace server
 {
 
-request_parser::request_parser() : state_(method_start)
+RequestParser::RequestParser() : state_(method_start)
 {
 }
 
-void request_parser::reset()
+void RequestParser::reset()
 {
     state_ = method_start;
 }
 
-request_parser::result_type request_parser::consume(request& req, char input)
+RequestParser::result_type RequestParser::consume(Request& req, char input)
 {
     switch (state_)
     {
@@ -201,7 +201,7 @@ request_parser::result_type request_parser::consume(request& req, char input)
         }
         else
         {
-            req.headers.push_back(header());
+            req.headers.push_back(Header{});
             req.headers.back().name.push_back(input);
             state_ = header_name;
             return indeterminate;
@@ -283,17 +283,17 @@ request_parser::result_type request_parser::consume(request& req, char input)
     }
 }
 
-bool request_parser::is_char(int c)
+bool RequestParser::is_char(int c)
 {
     return c >= 0 && c <= 127;
 }
 
-bool request_parser::is_ctl(int c)
+bool RequestParser::is_ctl(int c)
 {
     return (c >= 0 && c <= 31) || (c == 127);
 }
 
-bool request_parser::is_tspecial(int c)
+bool RequestParser::is_tspecial(int c)
 {
     switch (c)
     {
@@ -322,7 +322,7 @@ bool request_parser::is_tspecial(int c)
     }
 }
 
-bool request_parser::is_digit(int c)
+bool RequestParser::is_digit(int c)
 {
     return c >= '0' && c <= '9';
 }

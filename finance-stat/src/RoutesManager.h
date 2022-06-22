@@ -11,16 +11,16 @@ namespace http
 namespace server
 {
 
-class routes_manager
+class RoutesManager
 {
   public:
-    bool reg_service(const std::shared_ptr<iservice>& serv);
-    bool unreg_service(const std::shared_ptr<iservice>& serv);
-    reply runRoute(const request& req);
+    bool reg_service(const std::shared_ptr<IService>& serv);
+    bool unreg_service(const std::shared_ptr<IService>& serv);
+    Reply run_route(const Request& req);
     void clear_all_services();
 
   private:
-    std::unordered_map<std::string, std::shared_ptr<iservice>> services_;
+    std::unordered_map<std::string, std::shared_ptr<IService>> services_;
 
     bool url_decode(const std::string& in, std::string& out);
 };

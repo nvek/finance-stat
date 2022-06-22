@@ -7,14 +7,14 @@ namespace http
 namespace server
 {
 
-class data_base_service : public iservice
+class DataBaseService : public IService
 {
   public:
-    data_base_service();
+    DataBaseService();
 
-    int getPriority() override;
-    std::vector<std::string> getRoutes() override;
-    reply run(const request& req) override;
+    int get_priority() override;
+    std::vector<std::string> get_routes() const override;
+    Reply run(const Request& req) override;
 
   private:
     std::vector<std::string> routes_;

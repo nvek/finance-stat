@@ -8,12 +8,12 @@ namespace http
 namespace server
 {
 
-class iservice
+class IService
 {
   public:
-    virtual int getPriority() = 0;
-    virtual std::vector<std::string> getRoutes() = 0;
-    virtual reply run(const request& req) = 0;
+    virtual int get_priority() = 0;
+    virtual std::vector<std::string> get_routes() const = 0;
+    virtual Reply run(const Request& req) = 0;
 };
 
 } // namespace server

@@ -1,13 +1,3 @@
-//
-// server.cpp
-// ~~~~~~~~~~
-//
-// Copyright (c) 2003-2016 Christopher M. Kohlhoff (chris at kohlhoff dot com)
-//
-// Distributed under the Boost Software License, Version 1.0. (See accompanying
-// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
-//
-
 #include "Server.h"
 #include <signal.h>
 #include <utility>
@@ -65,7 +55,7 @@ void server::do_accept()
         if (!ec)
         {
             connection_manager_.start(
-                std::make_shared<connection>(std::move(socket_), connection_manager_, requestHandler_));
+                std::make_shared<Connection>(std::move(socket_), connection_manager_, requestHandler_));
         }
 
         do_accept();

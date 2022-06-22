@@ -1,15 +1,4 @@
-//
-// connection.hpp
-// ~~~~~~~~~~~~~~
-//
-// Copyright (c) 2003-2016 Christopher M. Kohlhoff (chris at kohlhoff dot com)
-//
-// Distributed under the Boost Software License, Version 1.0. (See accompanying
-// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
-//
-
-#ifndef HTTP_CONNECTION_HPP
-#define HTTP_CONNECTION_HPP
+#pragma once
 
 #include "Reply.h"
 #include "Request.h"
@@ -24,17 +13,18 @@ namespace http
 namespace server
 {
 
-class connection_manager;
+class ConnectionManager;
 
 /// Represents a single connection from a client.
-class connection : public std::enable_shared_from_this<connection>
+class Connection : public std::enable_shared_from_this<Connection>
 {
   public:
-    connection(const connection&) = delete;
-    connection& operator=(const connection&) = delete;
+    Connection(const Connection&) = delete;
+    Connection& operator=(const Connection&) = delete;
 
     /// Construct a connection with the given socket.
-    explicit connection(boost::asio::ip::tcp::socket socket, connection_manager& manager, const RequestHandlerPtr& handler);
+    explicit Connection(boost::asio::ip::tcp::socket socket, ConnectionManager& manager,
+                        const RequestHandlerPtr& handler);
 
     /// Start the first asynchronous operation for the connection.
     void start();
@@ -53,7 +43,7 @@ class connection : public std::enable_shared_from_this<connection>
     boost::asio::ip::tcp::socket socket_;
 
     /// The manager for this connection.
-    connection_manager& connection_manager_;
+    ConnectionManager& connection_manager_;
 
     /// The handler used to process the incoming request.
     const RequestHandlerPtr request_handler_;
@@ -62,18 +52,16 @@ class connection : public std::enable_shared_from_this<connection>
     std::array<char, 8192> buffer_;
 
     /// The incoming request.
-    request request_;
+    Request request_;
 
     /// The parser for the incoming request.
-    request_parser request_parser_;
+    RequestParser request_parser_;
 
     /// The reply to be sent back to the client.
-    reply reply_;
+    Reply reply_;
 };
 
-typedef std::shared_ptr<connection> connection_ptr;
+using ConnectionPtr = std::shared_ptr<Connection>;
 
 } // namespace server
 } // namespace http
-
-#endif // HTTP_CONNECTION_HPP

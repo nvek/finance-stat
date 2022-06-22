@@ -1,15 +1,4 @@
-//
-// request_parser.hpp
-// ~~~~~~~~~~~~~~~~~~
-//
-// Copyright (c) 2003-2016 Christopher M. Kohlhoff (chris at kohlhoff dot com)
-//
-// Distributed under the Boost Software License, Version 1.0. (See accompanying
-// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
-//
-
-#ifndef HTTP_REQUEST_PARSER_HPP
-#define HTTP_REQUEST_PARSER_HPP
+#pragma once
 
 #include <tuple>
 
@@ -18,14 +7,14 @@ namespace http
 namespace server
 {
 
-struct request;
+struct Request;
 
 /// Parser for incoming requests.
-class request_parser
+class RequestParser
 {
   public:
     /// Construct ready to parse the request method.
-    request_parser();
+    RequestParser();
 
     /// Reset to initial parser state.
     void reset();
@@ -43,7 +32,7 @@ class request_parser
     /// required. The InputIterator return value indicates how much of the input
     /// has been consumed.
     template <typename InputIterator>
-    std::tuple<result_type, InputIterator> parse(request& req, InputIterator begin, InputIterator end)
+    std::tuple<result_type, InputIterator> parse(Request& req, InputIterator begin, InputIterator end)
     {
         while (begin != end)
         {
@@ -56,7 +45,7 @@ class request_parser
 
   private:
     /// Handle the next character of input.
-    result_type consume(request& req, char input);
+    result_type consume(Request& req, char input);
 
     /// Check if a byte is an HTTP character.
     static bool is_char(int c);
@@ -98,5 +87,3 @@ class request_parser
 
 } // namespace server
 } // namespace http
-
-#endif // HTTP_REQUEST_PARSER_HPP

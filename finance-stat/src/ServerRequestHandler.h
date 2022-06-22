@@ -10,8 +10,8 @@ namespace http
 namespace server
 {
 
-struct reply;
-struct request;
+struct Reply;
+struct Request;
 
 /// The common handler for all incoming requests.
 class ServerRequestHandler : public RequestHandler
@@ -25,10 +25,10 @@ class ServerRequestHandler : public RequestHandler
     ~ServerRequestHandler();
 
     /// Handle a request and produce a reply.
-    void handle_request(const request& req, reply& rep) override;
+    void handle_request(const Request& req, Reply& rep) override;
 
   private:
-    routes_manager routes_mgr_;
+    RoutesManager routes_mgr_;
     /// The directory containing the files to be served.
     std::string doc_root_;
 };

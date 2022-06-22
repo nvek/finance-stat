@@ -1,15 +1,4 @@
-//
-// reply.hpp
-// ~~~~~~~~~
-//
-// Copyright (c) 2003-2016 Christopher M. Kohlhoff (chris at kohlhoff dot com)
-//
-// Distributed under the Boost Software License, Version 1.0. (See accompanying
-// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
-//
-
-#ifndef HTTP_REPLY_HPP
-#define HTTP_REPLY_HPP
+#pragma once
 
 #include "Header.h"
 #include <boost/asio.hpp>
@@ -22,7 +11,7 @@ namespace server
 {
 
 /// A reply to be sent to a client.
-struct reply
+struct Reply
 {
     /// The status of the reply.
     enum status_type
@@ -46,7 +35,7 @@ struct reply
     } status;
 
     /// The headers to be included in the reply.
-    std::vector<header> headers;
+    std::vector<Header> headers;
 
     /// The content to be sent in the reply.
     std::string content;
@@ -57,10 +46,8 @@ struct reply
     std::vector<boost::asio::const_buffer> to_buffers();
 
     /// Get a stock reply.
-    static reply stock_reply(status_type status);
+    static Reply stock_reply(status_type status);
 };
 
 } // namespace server
 } // namespace http
-
-#endif // HTTP_REPLY_HPP

@@ -1,13 +1,3 @@
-//
-// request_handler.cpp
-// ~~~~~~~~~~~~~~~~~~~
-//
-// Copyright (c) 2003-2016 Christopher M. Kohlhoff (chris at kohlhoff dot com)
-//
-// Distributed under the Boost Software License, Version 1.0. (See accompanying
-// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
-//
-
 #include "ServerRequestHandler.h"
 #include "FilesService.h"
 #include "MimeTypes.h"
@@ -25,8 +15,8 @@ namespace server
 
 ServerRequestHandler::ServerRequestHandler(const std::string& doc_root) : routes_mgr_()
 {
-    routes_mgr_.reg_service(std::make_shared<registration_service>());
-    routes_mgr_.reg_service(std::make_shared<files_service>(doc_root));
+    routes_mgr_.reg_service(std::make_shared<RegistrationService>());
+    routes_mgr_.reg_service(std::make_shared<FilesService>(doc_root));
 }
 
 ServerRequestHandler::~ServerRequestHandler()
@@ -34,9 +24,9 @@ ServerRequestHandler::~ServerRequestHandler()
     routes_mgr_.clear_all_services();
 }
 
-void ServerRequestHandler::handle_request(const request& req, reply& rep)
+void ServerRequestHandler::handle_request(const Request& req, Reply& rep)
 {
-    rep = routes_mgr_.runRoute(req);
+    rep = routes_mgr_.run_route(req);
     /*
     // Decode url to path.
     std::string request_path;

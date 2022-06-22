@@ -4,12 +4,12 @@ namespace http
 {
 namespace server
 {
-class registration_service : public iservice
+class RegistrationService : public IService
 {
   public:
-    int getPriority() override;
-    std::vector<std::string> getRoutes() override;
-    reply run(const request& req) override;
+    int get_priority() override;
+    std::vector<std::string> get_routes() const override;
+    Reply run(const Request& req) override;
 
   private:
     std::string doc_root_;

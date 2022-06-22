@@ -7,22 +7,23 @@ namespace http
 namespace server
 {
 
-data_base_service::data_base_service() : routes_()
+DataBaseService::DataBaseService() : routes_()
 {
     routes_.push_back("/costs");
 }
-int data_base_service::getPriority()
+int DataBaseService::get_priority()
 {
     return 0;
 }
-std::vector<std::string> data_base_service::getRoutes()
+std::vector<std::string> DataBaseService::get_routes() const
 {
     return routes_;
 }
-reply data_base_service::run(const request& req)
+
+Reply DataBaseService::run(const Request& req)
 {
-    reply rep;
-    rep.status = reply::ok;
+    Reply rep;
+    rep.status = Reply::ok;
 
     try
     {
@@ -57,8 +58,8 @@ reply data_base_service::run(const request& req)
         else
         {
             std::cout << "Can't open database" << std::endl;
-            reply rep;
-            rep.status = reply::bad_request;
+            Reply rep;
+            rep.status = Reply::bad_request;
             return rep;
         }
 
@@ -67,8 +68,8 @@ reply data_base_service::run(const request& req)
     catch (const std::exception& e)
     {
         std::cerr << e.what() << std::endl;
-        reply rep;
-        rep.status = reply::bad_request;
+        Reply rep;
+        rep.status = Reply::bad_request;
         return rep;
     }
 

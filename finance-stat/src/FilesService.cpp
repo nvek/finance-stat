@@ -5,23 +5,23 @@ namespace http
 namespace server
 {
 
-files_service::files_service(const std::string& doc_path) : doc_root_(doc_path)
+FilesService::FilesService(const std::string& doc_path) : doc_root_(doc_path)
 {
 }
 
-int files_service::getPriority()
+int FilesService::get_priority()
 {
     return 0;
 }
 
-std::vector<std::string> files_service::getRoutes()
+std::vector<std::string> FilesService::get_routes() const
 {
-    return std::vector<std::string>();
+    return {};
 }
 
-reply files_service::run(const request& req)
+Reply FilesService::run(const Request& req)
 {
-    return reply();
+    return {};
 }
 
 } // namespace server

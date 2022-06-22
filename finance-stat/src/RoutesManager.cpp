@@ -4,12 +4,12 @@ namespace http
 {
 namespace server
 {
-bool routes_manager::reg_service(const std::shared_ptr<iservice>& serv)
+bool RoutesManager::reg_service(const std::shared_ptr<IService>& serv)
 {
     if (!serv)
         return false;
 
-    for (const auto& route : serv->getRoutes())
+    for (const auto& route : serv->get_routes())
     {
         services_[route] = serv;
     }
@@ -17,12 +17,14 @@ bool routes_manager::reg_service(const std::shared_ptr<iservice>& serv)
     return true;
 }
 
-bool routes_manager::unreg_service(const std::shared_ptr<iservice>& serv)
+bool RoutesManager::unreg_service(const std::shared_ptr<IService>& serv)
 {
     if (!serv)
+    {
         return false;
+    }
 
-    for (const auto& route : serv->getRoutes())
+    for (const auto& route : serv->get_routes())
     {
         auto service_it = services_.find(route);
 
@@ -35,12 +37,12 @@ bool routes_manager::unreg_service(const std::shared_ptr<iservice>& serv)
     return true;
 }
 
-reply routes_manager::runRoute(const request& req)
+Reply RoutesManager::run_route(const Request& req)
 {
     std::string request_path;
     if (!url_decode(req.uri, request_path))
     {
-        return reply::stock_reply(reply::bad_request);
+        return Reply::stock_reply(Reply::bad_request);
     }
 
     auto service_it = services_.find(request_path);
@@ -48,15 +50,15 @@ reply routes_manager::runRoute(const request& req)
     if (service_it != services_.end())
         return service_it->second->run(req);
     else
-        return reply::stock_reply(reply::bad_request);
+        return Reply::stock_reply(Reply::bad_request);
 }
 
-void routes_manager::clear_all_services()
+void RoutesManager::clear_all_services()
 {
     services_.clear();
 }
 
-bool routes_manager::url_decode(const std::string& in, std::string& out)
+bool RoutesManager::url_decode(const std::string& in, std::string& out)
 {
     out.clear();
     out.reserve(in.size());

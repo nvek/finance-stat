@@ -42,7 +42,7 @@ class server
     boost::asio::ip::tcp::acceptor acceptor_;
 
     /// The connection manager which owns all live connections.
-    connection_manager connection_manager_;
+    ConnectionManager connection_manager_;
 
     /// The next socket to be accepted.
     boost::asio::ip::tcp::socket socket_;

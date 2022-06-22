@@ -4,19 +4,19 @@ namespace http
 {
 namespace server
 {
-int registration_service::getPriority()
+int RegistrationService::get_priority()
 {
     return 0;
 }
 
-std::vector<std::string> registration_service::getRoutes()
+std::vector<std::string> RegistrationService::get_routes() const
 {
-    return std::vector<std::string>();
+    return {};
 }
 
-reply registration_service::run(const request& req)
+Reply RegistrationService::run(const Request& req)
 {
-    return reply();
+    return {};
 }
 } // namespace server
 } // namespace http
